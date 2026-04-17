@@ -14,12 +14,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: |
-          cd client
+      - name: Build
+        run: |
+          # 밖으로 나와있는 파일들로 바로 빌드 진행
           npm install --legacy-peer-deps
           npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: client/dist
+          # 루트에 생길 dist 폴더를 정확히 지정
+          path: ./dist
       - uses: actions/deploy-pages@v4
