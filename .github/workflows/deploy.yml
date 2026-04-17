@@ -16,12 +16,12 @@ jobs:
           node-version: 20
       - name: Build
         run: |
-          # 밖으로 나와있는 파일들로 바로 빌드 진행
+          # 루트에 package.json이 있으니 여기서 바로 빌드
           npm install --legacy-peer-deps
           npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # 루트에 생길 dist 폴더를 정확히 지정
-          path: ./dist
+          # 핵심: 빌드 결과물이 client/dist 폴더 안에 생깁니다.
+          path: client/dist
       - uses: actions/deploy-pages@v4
