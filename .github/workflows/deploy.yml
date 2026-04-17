@@ -15,27 +15,11 @@ jobs:
         with:
           node-version: 20
       - run: |
-          if [ -d "client" ]; then
-            cd client
-            npm install --legacy-peer-deps
-            npm run build
-          else
-            npm install --legacy-peer-deps
-            npm run build
-          fi
+          cd client
+          npm install --legacy-peer-deps
+          npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # dist, build 폴더 중 있는 놈을 가져가도록 설정
-          path: |
-            client/dist
-            client/build
-            dist
-            build
-      - uses: actions/deploy-pages@v4
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: |
-            client/dist
-            dist
+          path: client/dist
       - uses: actions/deploy-pages@v4
