@@ -206,6 +206,7 @@ function vitePluginStorageProxy(): Plugin {
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
 export default defineConfig({
+  base: '/-Pet-Preference-Data-Platform-b2c-ver/', // <--- 1. 깃허브 주소표 추가!
   plugins,
   resolve: {
     alias: {
@@ -217,12 +218,12 @@ export default defineConfig({
   envDir: path.resolve(import.meta.dirname),
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: path.resolve(import.meta.dirname, "dist"), // <--- 2. public 지우고 그냥 dist로 수정! (이게 404의 진짜 원인)
     emptyOutDir: true,
   },
   server: {
     port: 3000,
-    strictPort: false, // Will find next available port if 3000 is busy
+    strictPort: false,
     host: true,
     allowedHosts: [
       ".manuspre.computer",
