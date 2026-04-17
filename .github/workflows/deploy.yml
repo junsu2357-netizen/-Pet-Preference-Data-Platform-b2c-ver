@@ -15,10 +15,17 @@ jobs:
         with:
           node-version: 20
       - run: |
-          cd client
-          npm install
-          npm run build
+          if [ -d "client" ]; then
+            cd client
+            npm install --legacy-peer-deps
+            npm run build
+          else
+            npm install --legacy-peer-deps
+            npm run build
+          fi
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: client/dist
+          path: |
+            client/dist
+            dist
       - uses: actions/deploy-pages@v4
